@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-ios:
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - name: Récupérer le code
         uses: actions/checkout@v4
@@ -18,18 +18,8 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Installer CocoaPods
-        run: |
-          sudo gem install cocoapods
-
-      - name: Installer les dépendances Flutter
+      - name: Installer les dépendances
         run: flutter pub get
-
-      - name: Installer les Pods iOS
-        run: |
-          cd ios
-          pod install --repo-update
-          cd ..
 
       - name: Compiler iOS (Release)
         run: flutter build ios --release --no-codesign
